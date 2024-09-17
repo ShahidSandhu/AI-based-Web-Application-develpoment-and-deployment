@@ -6,10 +6,8 @@
 from flask import Flask, render_template, request
 from SentimentAnalysis.sentiment_analysis import sentiment_analyzer
 
-
 #Initiate the flask app
 app = Flask("Sentiment Analyzer")
-
 
 @app.route("/sentimentAnalyzer")
 def sent_analyzer():
@@ -29,8 +27,13 @@ def sent_analyzer():
     score = response['score']
 
     # Return a formatted string with the sentiment label and score
-    return "The given text has been identified as {} with a score of {}.".format(label.split('_')[1], score)
-
+    # Check if the label is None, indicating an error or invalid input
+    if label:
+        # Return a formatted string with the sentiment label and score
+        lbl = label.split('_')[1]
+        return f"The given text has been identified as {lbl} with a score of {score}."
+    # Input string or text is invalid
+    return "Invalid input! Try again."
 
 @app.route("/")
 def render_index_page():
@@ -39,8 +42,5 @@ def render_index_page():
     '''
     return render_template('index.html')
 
-
 if __name__ == "__main__":
-    ''' This functions executes the flask app and deploys it on localhost:5000
-    '''
     app.run(debug=True)
