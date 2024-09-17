@@ -10,8 +10,8 @@ def sentiment_analyzer(text_to_analyse):
     this function analysis the given tixt or comments
     '''
     # URL of the sentiment analysis service
-    url = 'https://sn-watson-sentiment-bert.labs.skills.network/v1/watson\
-    .runtime.nlp.v1/NlpService/SentimentPredict'
+    url = 'https://sn-watson-sentiment-bert.labs.skills.network/v1/watson'\
+    '.runtime.nlp.v1/NlpService/SentimentPredict'
 
     # Constructing the request payload in the expected format
     myobj = { "raw_document": { "text": text_to_analyse } }
